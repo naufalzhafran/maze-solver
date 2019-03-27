@@ -43,6 +43,17 @@ class Maze:
 		elif direction is 3:
 			return (coord[0] - 1, coord[1])
 			
+	def look(self, coord, direction):
+		
+		if direction is 0:
+			return (self.maze[coord[0]][coord[1] + 1] == '0')
+		elif direction is 1:
+			return (self.maze[coord[0] + 1][coord[1]]== '0')
+		elif direction is 2:
+			return (self.maze[coord[0]][coord[1] - 1]== '0')
+		elif direction is 3:
+			return (self.maze[coord[0] - 1][coord[1]]== '0')
+			
 	"""
 	DIRECTION:
 	0: Up
@@ -50,6 +61,18 @@ class Maze:
 	2: Down
 	3: Left
 	"""
+
+	def solveDFS(self, track,startpoint):
+		# not done
+		# still infinity loop
+		ttrack = track
+		ttrack.append(startpoint)
+		for i in range(0,4):
+			if self.look(startpoint,i):
+				print(i)
+				self.solveDFS(ttrack,self.move(startpoint,i))
+		print(ttrack)
+
 	
 	
 	def draw(self) :
@@ -71,10 +94,4 @@ class Maze:
 		""".replace("	", "") % (self.length, self.width , self.start, self.finish))
 		
 		
-if __name__ == "__main__":
-	t = Maze()
-	t.load_file('maze_small.txt')
-	t.get_start()
-	t.get_finish()
-	t.debug()
-	t.draw()
+
