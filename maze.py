@@ -62,17 +62,28 @@ class Maze:
 	3: Left
 	"""
 
-	def solveDFS(self, track,startpoint):
+	def solveDFS(self, track,startpoint,hasvisited,solution,finalsol):
 		# not done
 		# still infinity loop
-		ttrack = track
-		ttrack.append(startpoint)
-		for i in range(0,4):
-			if self.look(startpoint,i):
-				print(i)
-				self.solveDFS(ttrack,self.move(startpoint,i))
-		print(ttrack)
 
+		if(startpoint == self.finish):
+			print("fi")
+			finalsol = solution
+		else:
+
+			ttrack = track
+			ttrack.append(startpoint)
+			hasvisited.append(startpoint)
+			solution.append(startpoint)
+			print(startpoint)
+			for i in range(0,4):
+				if self.look(startpoint,i) and self.move(startpoint,i) not in hasvisited:
+					self.solveDFS(ttrack,self.move(startpoint,i),hasvisited,solution,finalsol)
+					solution.pop()
+
+	def printSol(self,solution):
+		for sol in solution:
+			self.maze[sol[0]][sol[1]] = ' '
 	
 	
 	def draw(self) :
