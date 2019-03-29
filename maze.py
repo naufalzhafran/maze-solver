@@ -129,7 +129,7 @@ class Maze:
 		
 		
 	def solve_Astar(self):
-		#Return path from end to  finish
+		#Return path from start to  finish
 
 		# Initialization
 		start_node = Node_Astar(None, self.start)
