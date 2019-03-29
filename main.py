@@ -12,4 +12,7 @@ if __name__ == "__main__":
     t.solveDFS([],(1,0),hasvis,[],solu)
     t.printSol(solu)
     print(solu)
-    
+    print("A star")
+    print("langkah :")
+    langkah = t.solve_Astar()
+    print(langkah)
