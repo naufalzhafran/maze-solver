@@ -1,5 +1,9 @@
 import collections
 
+def printSol(maze,solution):
+	for sol in solution:
+		maze[sol[0]][sol[1]] = ' '	
+
 class Node_Astar():
     def __init__(self, parent=None, pos=None):
         self.parent = parent
@@ -95,9 +99,7 @@ class Maze:
 		""".replace("	", "") % (self.length, self.width , self.start, self.finish))
 	
 
-	def printSol(self,solution):
-		for sol in solution:
-			self.maze[sol[0]][sol[1]] = ' '	
+
 			
 			
 	def convert(self):
@@ -176,19 +178,24 @@ class Maze:
 
 				# Add
 				simpul_hidup.append(n)
+
 	def bfs(self, root): 
 		visited, queue = set(), collections.deque([[root]])
 		while queue: 
 			vertex = queue.popleft()
 			visited.add(vertex[len(vertex)-1])
 			if(vertex[len(vertex)-1] == self.finish):
-				print(vertex)
+				# print(vertex)
+				return vertex
+				
 			for i in range(0,4):
 				if(self.look(vertex[len(vertex)-1],i)):
 					if(self.move(vertex[len(vertex)-1],i) not in visited):
 						Tvertex = vertex.copy()
 						Tvertex.append(self.move(vertex[len(vertex)-1],i))
 						queue.append(Tvertex)
+
+
 
 '''		
 #Implementation	
