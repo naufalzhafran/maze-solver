@@ -15,25 +15,7 @@ HEIGHT = 20
 MARGIN = 0
  
 
-if __name__ == "__main__":	def solveDFS(self, track,startpoint,hasvisited,solution,finalsol):
-		# not done
-		# still infinity loop
-
-		if(startpoint == self.finish):
-			print("fi")
-			finalsol = solution
-		else:
-
-			ttrack = track
-			ttrack.append(startpoint)
-			hasvisited.append(startpoint)
-			solution.append(startpoint)
-			print(startpoint)
-			for i in range(0,4):
-				if self.look(startpoint,i) and self.move(startpoint,i) not in hasvisited:
-					self.solveDFS(ttrack,self.move(startpoint,i),hasvisited,solution,finalsol)
-					solution.pop()
-
+if __name__ == "__main__":
     t = maze.Maze()
     t.load_file("maze_xlarge.txt")
     t.get_start()
