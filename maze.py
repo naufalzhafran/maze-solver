@@ -97,10 +97,7 @@ class Maze:
 		Start : %s
 		Finish : %s
 		""".replace("	", "") % (self.length, self.width , self.start, self.finish))
-	
 
-
-			
 			
 	def convert(self):
 		for y in range(self.width): 
@@ -115,7 +112,7 @@ class Maze:
 		
 		
 	def solve_Astar(self):
-		#Return path from start to  finish
+		#Return path from end to  finish
 
 		# Initialization
 		start_node = Node_Astar(None, self.start)
@@ -178,7 +175,6 @@ class Maze:
 
 				# Add
 				simpul_hidup.append(n)
-
 	def bfs(self, root): 
 		visited, queue = set(), collections.deque([[root]])
 		while queue: 
@@ -194,24 +190,34 @@ class Maze:
 						Tvertex = vertex.copy()
 						Tvertex.append(self.move(vertex[len(vertex)-1],i))
 						queue.append(Tvertex)
+'''
 
 
 
 '''		
-#Implementation	
-if __name__ == '__main__':
-	m = Maze()
-	m.load_file("maze_large.txt")
-	m.get_start()
-	m.get_finish()
-	m.convert()
-	m.debug()
-	m.draw()
-	print("langkah :")
-	langkah = m.solve_Astar()
+# #Implementation	
+# if __name__ == '__main__':
+# 	m = Maze()
+# 	m.load_file("maze_large.txt")
+# 	m.get_start()
+# 	m.get_finish()
+# 	m.convert()
+# 	m.debug()
+# 	m.draw()
+# 	print()
+# 	print("langkah :")
+# 	langkah = m.solve_Astar()
+# 	print(langkah)
 	
-	print(langkah)
+# 	panjang = len(langkah)
+# 	#print(panjang)
+# 	print()
+# 	print("langkah dalam peta = ")
+# 	for i in range(panjang) :
+# 		m.maze[int(langkah[i][0])][int(langkah[i][1])] = "x"
+		
+# 	m.draw()
 
 
-'''
+
 		
