@@ -1,5 +1,3 @@
-import collections
-
 class Node_Astar():
     def __init__(self, parent=None, pos=None):
         self.parent = parent
@@ -94,6 +92,24 @@ class Maze:
 		Finish : %s
 		""".replace("	", "") % (self.length, self.width , self.start, self.finish))
 	
+	def solveDFS(self, track,startpoint,hasvisited,solution,finalsol):
+		# not done
+		# still infinity loop
+
+		if(startpoint == self.finish):
+			print("fi")
+			finalsol = solution
+		else:
+
+			ttrack = track
+			ttrack.append(startpoint)
+			hasvisited.append(startpoint)
+			solution.append(startpoint)
+			print(startpoint)
+			for i in range(0,4):
+				if self.look(startpoint,i) and self.move(startpoint,i) not in hasvisited:
+					self.solveDFS(ttrack,self.move(startpoint,i),hasvisited,solution,finalsol)
+					solution.pop()
 
 	def printSol(self,solution):
 		for sol in solution:
@@ -113,7 +129,7 @@ class Maze:
 		
 		
 	def solve_Astar(self):
-		#Return path from start to  finish
+		#Return path from end to  finish
 
 		# Initialization
 		start_node = Node_Astar(None, self.start)
@@ -176,6 +192,8 @@ class Maze:
 
 				# Add
 				simpul_hidup.append(n)
+				
+				
 	def bfs(self, root): 
 		visited, queue = set(), collections.deque([[root]])
 		while queue: 
@@ -190,7 +208,7 @@ class Maze:
 						Tvertex.append(self.move(vertex[len(vertex)-1],i))
 						queue.append(Tvertex)
 
-'''		
+
 #Implementation	
 if __name__ == '__main__':
 	m = Maze()
@@ -200,11 +218,21 @@ if __name__ == '__main__':
 	m.convert()
 	m.debug()
 	m.draw()
+	print()
 	print("langkah :")
 	langkah = m.solve_Astar()
-	
 	print(langkah)
+	
+	panjang = len(langkah)
+	#print(panjang)
+	print()
+	print("langkah dalam peta = ")
+	for i in range(panjang) :
+		m.maze[int(langkah[i][0])][int(langkah[i][1])] = "x"
+		
+	m.draw()
 
 
-'''
+
+
 		
