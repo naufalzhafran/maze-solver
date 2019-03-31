@@ -207,7 +207,7 @@ class Maze:
 						Tvertex = vertex.copy()
 						Tvertex.append(self.move(vertex[len(vertex)-1],i))
 						queue.append(Tvertex)
-
+'''
 
 #Implementation	
 if __name__ == '__main__':
@@ -232,7 +232,7 @@ if __name__ == '__main__':
 		
 	m.draw()
 
-
+'''
 
 
 		
