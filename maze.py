@@ -39,20 +39,25 @@ class Maze:
 			
 	def get_start(self):
 		# Scan starting point
-		
+		'''
 		for y in range(self.width):
 			if self.maze[y][0] == "0" :
 				self.start = (int(y),int(0))
 				break
-				
+		'''
+		input_user = input("Titik awal (baris,kolom) :").split()
+		self.start = (int(input_user[0]),int(input_user[1]))	
+
 	def get_finish(self):
-		
 		# Scan finishing point
+		'''
 		for y in range(self.width):
 			if self.maze[y][self.length-1] == "0" :
 				self.finish = (int(y),int(self.length-1))
 				break
-			
+		'''	
+		input_user = input("Titik akhir (baris,kolom) :").split()
+		self.finish = (int(input_user[0]),int(input_user[1]))	
 	def look(self, coord, direction):
 		
 		if direction is 0:
@@ -112,7 +117,7 @@ class Maze:
 		
 		
 	def solve_Astar(self):
-		#Return path from end to  finish
+		#Return path from start to  end
 
 		# Initialization
 		start_node = Node_Astar(None, self.start)
@@ -170,11 +175,13 @@ class Maze:
 			for n in branch:
 				# f, g, h val
 				n.g_val = node.g_val + 1
-				n.h_val = abs((n.loc[0] - end_node.loc[0])) + abs((n.loc[1] - end_node.loc[1]))
+				#heuristic function with manhattan distance
+				n.h_val = abs((n.loc[0] - end_node.loc[0])) + abs((n.loc[1] - end_node.loc[1])) 
 				n.f_val = n.g_val + n.h_val
 
 				# Add
 				simpul_hidup.append(n)
+				
 	def bfs(self, root): 
 		visited, queue = set(), collections.deque([[root]])
 		while queue: 
@@ -190,34 +197,33 @@ class Maze:
 						Tvertex = vertex.copy()
 						Tvertex.append(self.move(vertex[len(vertex)-1],i))
 						queue.append(Tvertex)
-'''
 
+
+
+'''
+	
+#Implementation	
+if __name__ == '__main__':
+ 	m = Maze()
+ 	m.load_file("maze_large.txt")
+ 	m.get_start()
+ 	m.get_finish()
+ 	m.convert()
+ 	m.debug()
+ 	m.draw()
+ 	print()
+ 	print("langkah :")
+ 	langkah = m.solve_Astar()
+ 	print(langkah)
+	
+ 	panjang = len(langkah)
+ 	#print(panjang)
+ 	print()
+ 	print("langkah dalam peta = ")
+ 	for i in range(panjang) :
+ 		m.maze[int(langkah[i][0])][int(langkah[i][1])] = "x"
+		
+ 	m.draw()
 
 
 '''		
-# #Implementation	
-# if __name__ == '__main__':
-# 	m = Maze()
-# 	m.load_file("maze_large.txt")
-# 	m.get_start()
-# 	m.get_finish()
-# 	m.convert()
-# 	m.debug()
-# 	m.draw()
-# 	print()
-# 	print("langkah :")
-# 	langkah = m.solve_Astar()
-# 	print(langkah)
-	
-# 	panjang = len(langkah)
-# 	#print(panjang)
-# 	print()
-# 	print("langkah dalam peta = ")
-# 	for i in range(panjang) :
-# 		m.maze[int(langkah[i][0])][int(langkah[i][1])] = "x"
-		
-# 	m.draw()
-
-
-
-		
