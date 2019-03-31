@@ -1,9 +1,3 @@
-import collections
-
-def printSol(maze,solution):
-	for sol in solution:
-		maze[sol[0]][sol[1]] = ' '	
-
 class Node_Astar():
     def __init__(self, parent=None, pos=None):
         self.parent = parent
@@ -97,7 +91,30 @@ class Maze:
 		Start : %s
 		Finish : %s
 		""".replace("	", "") % (self.length, self.width , self.start, self.finish))
+	
+	def solveDFS(self, track,startpoint,hasvisited,solution,finalsol):
+		# not done
+		# still infinity loop
 
+		if(startpoint == self.finish):
+			print("fi")
+			finalsol = solution
+		else:
+
+			ttrack = track
+			ttrack.append(startpoint)
+			hasvisited.append(startpoint)
+			solution.append(startpoint)
+			print(startpoint)
+			for i in range(0,4):
+				if self.look(startpoint,i) and self.move(startpoint,i) not in hasvisited:
+					self.solveDFS(ttrack,self.move(startpoint,i),hasvisited,solution,finalsol)
+					solution.pop()
+
+	def printSol(self,solution):
+		for sol in solution:
+			self.maze[sol[0]][sol[1]] = ' '	
+			
 			
 	def convert(self):
 		for y in range(self.width): 
@@ -175,15 +192,15 @@ class Maze:
 
 				# Add
 				simpul_hidup.append(n)
+				
+				
 	def bfs(self, root): 
 		visited, queue = set(), collections.deque([[root]])
 		while queue: 
 			vertex = queue.popleft()
 			visited.add(vertex[len(vertex)-1])
 			if(vertex[len(vertex)-1] == self.finish):
-				# print(vertex)
-				return vertex
-				
+				print(vertex)
 			for i in range(0,4):
 				if(self.look(vertex[len(vertex)-1],i)):
 					if(self.move(vertex[len(vertex)-1],i) not in visited):
@@ -192,32 +209,29 @@ class Maze:
 						queue.append(Tvertex)
 '''
 
-
-
-'''		
-# #Implementation	
-# if __name__ == '__main__':
-# 	m = Maze()
-# 	m.load_file("maze_large.txt")
-# 	m.get_start()
-# 	m.get_finish()
-# 	m.convert()
-# 	m.debug()
-# 	m.draw()
-# 	print()
-# 	print("langkah :")
-# 	langkah = m.solve_Astar()
-# 	print(langkah)
+#Implementation	
+if __name__ == '__main__':
+	m = Maze()
+	m.load_file("maze_small.txt")
+	m.get_start()
+	m.get_finish()
+	m.convert()
+	m.debug()
+	m.draw()
+	print()
+	print("langkah :")
+	langkah = m.solve_Astar()
+	print(langkah)
 	
-# 	panjang = len(langkah)
-# 	#print(panjang)
-# 	print()
-# 	print("langkah dalam peta = ")
-# 	for i in range(panjang) :
-# 		m.maze[int(langkah[i][0])][int(langkah[i][1])] = "x"
+	panjang = len(langkah)
+	#print(panjang)
+	print()
+	print("langkah dalam peta = ")
+	for i in range(panjang) :
+		m.maze[int(langkah[i][0])][int(langkah[i][1])] = "x"
 		
-# 	m.draw()
+	m.draw()
 
 
-
+'''
 		
