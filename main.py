@@ -6,6 +6,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+BLUE = (25,25,122)
  
 
 WIDTH = 20
@@ -24,6 +25,7 @@ if __name__ == "__main__":
     solve = []
     solve = t.maze.copy()
     langkah = t.solve_Astar()
+    print("Tekan arrow key kanan untuk melihat hasil BFS, lalu arrow key kiri untuk hasil A*")
 
  
     pygame.init()
@@ -52,7 +54,11 @@ if __name__ == "__main__":
         for row in range(len(solve)):
             for column in range(len(solve[0])):
                 color = WHITE
-                if solve[row][column] == '1':
+                if(row == t.start[0] and column == t.start[1]):
+                    color = BLACK
+                elif(row == t.finish[0] and column == t.finish[1]):
+                    color = BLUE
+                elif solve[row][column] == '1':
                     color = GREEN
                 elif solve[row][column] == ' ':
                     color = RED
