@@ -17,11 +17,13 @@ MARGIN = 0
 
 if __name__ == "__main__":
     t = maze.Maze()
-    t.load_file("maze_xlarge.txt")
+    t.load_file("maze_large.txt")
     t.get_start()
     t.get_finish()
+    t.convert()
     solve = []
     solve = t.maze.copy()
+    langkah = t.solve_Astar()
 
  
     pygame.init()
@@ -43,6 +45,9 @@ if __name__ == "__main__":
                     ans = t.bfs(t.start)
                     print(ans)
                     maze.printSol(solve,ans)
+                if event.key == pygame.K_LEFT:
+                    print(langkah)
+                    maze.printSol(solve,langkah)
 
         for row in range(len(solve)):
             for column in range(len(solve[0])):
